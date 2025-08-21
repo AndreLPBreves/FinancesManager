@@ -1,0 +1,83 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🔒 Debug com HTTPS (porta 7073)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet: build",
+            "program": "${workspaceFolder}/backend/bin/Debug/net9.0/backend.dll",
+            "args": [
+                "run",
+                "--launch-profile",
+                "https"
+            ],
+            "cwd": "${workspaceFolder}/backend",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+            },
+        },
+        {
+            "name": "🌐 Debug com HTTP (porta 5024)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet: build",
+            "program": "${workspaceFolder}/backend/bin/Debug/net9.0/backend.dll",
+            "args": [
+                "run",
+                "--launch-profile",
+                "http"
+            ],
+            "cwd": "${workspaceFolder}/backend",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+            },
+        },
+        {
+            "name": "🌐 NextJs http",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "cwd": "${workspaceFolder}/frontend",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "name": "🔒 NextJs https",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "devhttps"
+            ],
+            "cwd": "${workspaceFolder}/frontend",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+    ],
+    "compounds": [
+        {
+            "name": "🌐 fullstack http",
+            "configurations": [
+                "🌐 Debug com HTTP (porta 5024)",
+                "🌐 NextJs http"
+            ]
+        },
+        {
+            "name": "🔒 fullstack https",
+            "configurations": [
+                "🔒 Debug com HTTPS (porta 7073)",
+                "🔒 NextJs https"
+            ]
+        }
+    ]
+}
